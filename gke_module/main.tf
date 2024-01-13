@@ -12,11 +12,16 @@ module "gke" {
   region           = var.region
   network          = var.vpc_name
   subnetwork       = var.subnet_name
+  subnetwork_project = var.project_id
   node_pool_name   = var.node_pool_name
-  node_count       = 1
   machine_type     = var.machine_type
+  node_count       = 1
   node_locations   = [var.region]
-  enable_autoscaling = false
+  enable_autoscaling = true
+  enable_network_policy = false
+  create_service_account = false
   ip_range_pods    = var.ip_range_pods
   ip_range_services = var.ip_range_services
+  subnetwork_ip_ranges   = [var.ip_range_pods]
+  subnetwork_secondary_ip_ranges = {}
 }
