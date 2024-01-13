@@ -1,16 +1,15 @@
-provider "google" {
-  credentials = file("../credentials/awesome-gist-402911-68434aac7771.json")
-  project     = var.project_id
-  region      = var.region
+resource "google_compute_network" "vpc" {
+  name    = var.vpc_name
+  project = var.project_id
 }
 
-module "vpc" {
-  source = "terraform-google-modules/network/google"
+resource "google_compute_subnetwork" "subnet" {
+  name          = var.subnet_name
+  ip_cidr_range = var.cidr_block
+  region        = var.region
+  network       = google_compute_network.vpc.name
+}
 
-  project_id      = var.project_id
-  network_name    = var.vpc_name
-  subnets         = [var.subnet_name]
-  location        = var.region
-  ip_cidr_range   = "10.0.0.0/16"
-  subnetwork_secondary_ip_range = {}
+output "subnet_id" {
+  value = google_compute_subnetwork.subnet.id
 }
