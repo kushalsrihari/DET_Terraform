@@ -23,5 +23,5 @@ variable "node_pool_name" {
 }
 
 variable "machine_type" {
-  description = "Machine type for GKE nodes"
+  description = "Machine type for GKE  nodes"
 }
