@@ -3,3 +3,11 @@ provider "google" {
   project     = var.project_id
   region      = var.region
 }
+
+module "vpc" {
+  source    = "./vpc_module"
+}
+
+module "gke" {
+  source          = "./gke_module"
+}
