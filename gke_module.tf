@@ -1,6 +1,6 @@
 module "gke" {
   source          = "terraform-google-modules/kubernetes-engine/google"
-  cluster_name    = var.cluster_name
+  name    = var.cluster_name
   project_id      = var.project_id
   region          = var.region
   network         = module.vpc.network_name
