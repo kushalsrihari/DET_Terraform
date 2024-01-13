@@ -1,20 +1,20 @@
 provider "google" {
-  credentials = file("awesome-gist-402911-68434aac7771.json")
+  credentials = file("<PATH_TO_YOUR_SERVICE_ACCOUNT_KEY_JSON>")
+  project     = var.project_id
+  region      = var.region
 }
 
 module "gke" {
-  source  = "terraform-google-modules/kubernetes-engine/google"
-  version = "13.0.0"
-  
-  project_id  = var.project_id
-  name        = var.cluster_name
-  region      = var.region
-  node_pools  = {
-    default = {
-      node_count = 3
-      machine_type = "n1-standard-2"
-    }
-  }
-  
-  network = module.vpc.network_name
+  source = "terraform-google-modules/kubernetes-engine/google"
+
+  cluster_name     = var.cluster_name
+  project_id       = var.project_id
+  region           = var.region
+  network          = module.vpc.network_name
+  subnetwork       = module.vpc.subnetwork_name
+  node_pool_name   = var.node_pool_name
+  node_count       = 1
+  machine_type     = var.machine_type
+  node_locations   = [var.region]
+  enable_autoscaling = false
 }
