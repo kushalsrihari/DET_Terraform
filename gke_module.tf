@@ -1,5 +1,5 @@
 provider "google" {
-  credentials = file("<path-to-your-service-account-json>")
+  credentials = file("awesome-gist-402911-68434aac7771.json")
 }
 
 module "gke" {
