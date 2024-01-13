@@ -1,6 +1,6 @@
 module "vpc" {
   source = "terraform-google-modules/network/google"
-
+  
   project_id      = var.project_id
   network_name    = var.vpc_name
   subnetwork_name = var.subnet_name
