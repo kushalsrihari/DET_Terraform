@@ -14,7 +14,7 @@ provider "google" {
 }
 
 module "vpc" {
-  source = "./modules/vpc"
+  source = "./vpc_modules"
 
   project_id   = var.project_id
   region       = var.region
@@ -24,7 +24,7 @@ module "vpc" {
 }
 
 module "gke" {
-  source = "./modules/gke"
+  source = "./gke_modules"
 
   project_id       = var.project_id
   region           = var.region
