@@ -1,25 +1,18 @@
 provider "google" {
-  credentials = file("<path-to-your-service-account-json>")
+  credentials = file("<PATH_TO_YOUR_SERVICE_ACCOUNT_KEY_JSON>")
+  project     = var.project_id
+  region      = var.region
 }
 
 module "vpc" {
-  source  = "terraform-google-modules/network/google"
-  version = "3.4.0"
-  
-  project_id   = var.project_id
-  network_name = "my-vpc"
-  region       = var.region
+  source = "terraform-google-modules/network/google"
 
-  subnets = {
-    subnet1 = {
-      subnet_name   = "subnet-1"
-      subnet_ip     = "10.0.1.0/24"
-      subnet_region = var.region
-    }
-    subnet2 = {
-      subnet_name   = "subnet-2"
-      subnet_ip     = "10.0.2.0/24"
-      subnet_region = var.region
-    }
+  project_id      = var.project_id
+  network_name    = var.vpc_name
+  subnetwork_name = var.subnet_name
+  ip_cidr_range   = "10.0.0.0/16"
+  region          = var.region
+  subnetwork_secondary_ip_range = {
+    var.subnet_name = ["10.0.1.0/24"]
   }
 }
