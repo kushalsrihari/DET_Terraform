@@ -1,5 +1,5 @@
 provider "google" {
-  credentials = file("<PATH_TO_YOUR_SERVICE_ACCOUNT_KEY_JSON>")
+  credentials = file("awesome-gist-402911.json")
   project     = var.project_id
   region      = var.region
 }
